@@ -23,6 +23,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/profile','HomeController@profileUser');
 Route::put('/profile/update/{id}','HomeController@profileUpdate');
 
+Route::get('/admin/index','AdminController@AdminIndex');
+
 Route::prefix('api')->group(function () {
     
     Route::get('/perjalanan','HomeController@show');

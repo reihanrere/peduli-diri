@@ -146,7 +146,7 @@
                 </div>
                 <div class="modal-body">
                     <form id="form-perjalanan">
-                        {{ csrf_field() }}
+                        {{ csrf_field() }}  
                         <?php date_default_timezone_set('Asia/Jakarta'); ?>
                         <input type="hidden" name="id_perjalanan" id="id_perjalanan">
                         <input type="hidden" id="status" name="status" value="Dalam Perjalanan">
@@ -226,7 +226,6 @@
                 document.getElementById('suhu_tubuh').value = "";
                 document.getElementById('status').value = "";
                 document.getElementById('user_id').value = "";
-                console.log("hide");
             })
         }, false);
 
