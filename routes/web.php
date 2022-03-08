@@ -23,7 +23,7 @@ Route::get('/app', function () {
     return view('layouts.app');
 });
 
-Route::group(['middleware' => ['auth','checkRole:admin,siswa']],function(){{
+Route::group(['middleware' => ['auth','checkRole:admin,user']],function(){{
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/profile','HomeController@profileUser');
     Route::put('/profile/update/{id}','HomeController@profileUpdate');

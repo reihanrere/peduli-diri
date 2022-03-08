@@ -32,7 +32,7 @@
                                                     <th>Email</th>
                                                     <th>Username</th>
                                                     <th>Telp</th>
-                                                    <th>Kota</th>
+                                                    <th>Alamat</th>
                                                     <th>Foto</th>
                                                     <th>Action</th>
                                                 </tr>
@@ -45,7 +45,7 @@
                                                         <td>{{ $user->email }}</td>
                                                         <td>{{ $user->username }}</td>
                                                         <td>{{ $user->telp }}</td>
-                                                        <td>{{ $user->kota->nama == null ? "" : $user->kota->nama }}</td>
+                                                        <td>{{ $user->alamat }}</td>
                                                         <td>
                                                             <img src="{{ url('image') }}/{{ $user->foto }}"
                                                             alt="user avatar" style="max-width: 50px;">
@@ -55,40 +55,6 @@
                                                                 style="width: 70px; padding: 5px">Edit</a>
                                                             <a href="/admin/delete-user/{{$user->id}}" class="btn btn-danger btn-sm"
                                                                 style="width: 70px; padding: 5px">Delete</a>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card feature-faq-card">
-                            <div class="card-header bg-white" id="featureFaqTwoTitle">
-                                <a href="#featureFaqTwoCollapse" class="d-flex align-items-center" data-toggle="collapse">
-                                    <h5 class="mb-0">Kota</h5> <i class="far fa-plus-square ml-auto"></i>
-                                </a>
-                            </div>
-                            <div id="featureFaqTwoCollapse" class="collapse" aria-labelledby="featureFaqTwoTitle">
-                                <div class="card-body">
-                                    <a href="/admin/create-kota" class="btn btn-success btn-sm" class="btn btn-danger btn-sm"
-                                    style="width: 70px; padding: 5px; margin-bottom: 10px;">Tambah</a>
-                                    <div class="table-responsive">
-                                        <table class="table">
-                                            <thead>
-                                                <tr>
-                                                    <th>Nama Kota</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach ($kotas as $kota)
-                                                    <tr>
-                                                        <td>{{ $kota->nama }}</td>
-                                                        <td>
-                                                            <a href="/admin/edit-kota/{{$kota->id}}" class="btn btn-warning btn-sm"
-                                                                style="width: 70px; padding: 5px">Edit</a>
                                                         </td>
                                                     </tr>
                                                 @endforeach

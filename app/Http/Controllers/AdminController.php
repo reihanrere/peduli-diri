@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use \App\Model\kota;
 use \App\Model\Perjalanan;
 use \App\User;
 use Illuminate\Support\Facades\Hash;
@@ -11,17 +10,14 @@ use Illuminate\Support\Facades\Hash;
 class AdminController extends Controller
 {
     public function AdminIndex() {
-
-        $kotas = kota::all();
         $users = User::all();
 
-        return view('admin.index',compact('kotas','users'));
+        return view('admin.index',compact('users'));
 
     }
 
     public function CreateUser(Request $request) {
-        $kota = kota::all();
-        return view('admin.create-user',compact('kota'));
+        return view('admin.create-user');
     }
 
     public function StoreUser(Request $request) {
@@ -34,17 +30,16 @@ class AdminController extends Controller
         $user->password = Hash::make($request->password);
         $user->telp = $request->telp;
         $user->foto = "default.png";
-        $user->kota_id = $request->kota_id;
+        $user->alamat = $request->alamat;
         $user->save();
 
         return redirect('/admin/index');
     }
 
     public function EditUser($id) {
-        $kota = kota::all();
         $user = User::findOrFail($id);
 
-        return view('admin.update-user',compact('kota','user'));
+        return view('admin.update-user',compact('user'));
     }
 
     public function UpdateUser(Request $request, $id) {
@@ -73,36 +68,4 @@ class AdminController extends Controller
         return redirect('/admin/index');
 
     }
-
-    public function CreateKota() {return view('admin.create-kota');}
-
-    public function StoreKota(Request $request) {
-        kota::create($request->all());
-
-        return redirect('/admin/index');
-    }
-
-    public function EditKota($id) {
-        $kota = kota::findOrFail($id);
-
-        return view('admin.update-kota',compact('kota'));
-    }
-
-    public function UpdateKota(Request $request, $id) {
-        $kota = kota::findOrFail($id);
-        $kota->update($request->all());
-        $kota->save();
-
-        return redirect('/admin/index');
-    }
-
-    // public function DeleteKota($id) {
-    //     // $user = User::findOrFail($id);
-    //     $kota = kota::findOrFail($id);
-    //     $kota->delete();
-        
-    //     // dd($kota);
-
-    //     return redirect('/admin/index');
-    // }
 }

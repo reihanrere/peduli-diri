@@ -21,7 +21,7 @@
                                                     <select class="form-control" name="role" aria-label="Default select example">
                                                         <option selected>Select Role</option>
                                                         <option value="admin">Admin</option>
-                                                        <option value="siswa">Siswa</option>
+                                                        <option value="user">User</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -77,13 +77,9 @@
                                         </li>
                                         <li class="list-group-item">
                                             <div class="row" style="width: 100%">
-                                                <label for="colFormLabel" class="col-sm-2 col-form-label">Kota</label>
+                                                <label for="colFormLabel" class="col-sm-2 col-form-label">Alamat</label>
                                                 <div class="col-sm-10">
-                                                    <select class="form-control" name="kota_id" aria-label="Default select example" data-live-search="true">
-                                                        @foreach ($kota as $kota)
-                                                            <option value="{{ $kota->id }}">{{ $kota->nama }}</option>
-                                                        @endforeach
-                                                    </select>
+                                                    <textarea class="form-control" value="" name="alamat" id="alamat" rows="3"></textarea>
                                                 </div>
                                             </div>
                                         </li>

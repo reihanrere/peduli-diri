@@ -41,7 +41,7 @@ class HomeController extends Controller
         if(auth()->user()->role == 'admin') {
             $perjalanan = \App\Model\Perjalanan::with('User')->orderBy('status', 'asc')->get();
             return response()->json(["code" => "00", "message" => "success" , "data" => $perjalanan]);
-        } elseif(auth()->user()->role == 'siswa'){
+        } elseif(auth()->user()->role == 'user'){
             $perjalanan = \App\Model\Perjalanan::where('user_id', auth()->user()->id)
             ->where(function ($query) {
                 $query->where(DB::raw('datediff(now(),created_at)'),"<",3)
