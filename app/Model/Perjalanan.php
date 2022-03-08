@@ -16,7 +16,13 @@ class Perjalanan extends Model
         "suhu_tubuh",
         "user_id",
         "status",
+        "latitude",
+        "longitude",
     ];
 
     protected $primaryKey = "id_perjalanan";
+
+    public function User () {
+        return $this->belongsTo('App\User', 'user_id');
+    }
 }

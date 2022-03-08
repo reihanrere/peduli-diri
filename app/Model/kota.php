@@ -14,4 +14,9 @@ class kota extends Model
     ];
 
     protected $primaryKey = 'id';
+
+    public function User(){
+        return $this->hasMany('App\User', 'kota_id','id');
+    }
+
 }

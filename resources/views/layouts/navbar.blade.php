@@ -1,65 +1,63 @@
-        <!-- Navigation -->
-        <nav id="navbarExample" class="navbar navbar-expand-lg fixed-top navbar-light" aria-label="Main navigation">
-            <div class="container">
+<nav class="navbar navbar-expand-lg navbar-light foi-navbar">
+    @if (Route::getCurrentRoute()->uri() == '/' || Route::getCurrentRoute()->uri() == 'login' || Route::getCurrentRoute()->uri() == 'register')
+    <a class="navbar-brand" href="/">
+        {{-- <img src="{{asset('assets/images/logo.svg')}}" alt="FOI"> --}}
+        <h4 style="color: #6206a7;">PeduliDiri.com</h4>
+    </a>
+    @else
+    <a class="navbar-brand" href="/home">
+        {{-- <img src="{{asset('assets/images/logo.svg')}}" alt="FOI"> --}}
+        <h4 style="color: #6206a7;">PeduliDiri.com</h4>
+    </a>
+    @endif
+    <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
+        aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavId">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            @if (Route::getCurrentRoute()->uri() == '/' || Route::getCurrentRoute()->uri() == 'login' || Route::getCurrentRoute()->uri() == 'register')
+                {{-- <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                </li> --}}
+            @else
+                <li class="nav-item">
+                    <a href="/home" class="nav-link">Perjalanan</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/profile" class="nav-link">Profile</a>
+                </li>
+                @if (auth()->user()->role == 'admin')
+                    <li class="nav-item">
+                        <a href="/admin/index" class="nav-link">Tables</a>
+                    </li>
+                @endif
+                <li class="nav-item">
+                    <a href="{{ route('logout') }}" class="nav-link">Logout</a>
+                </li>
+            @endif
+        </ul>
+        <ul class="navbar-nav mt-2 mt-lg-0">
 
-                <!-- Image Logo -->
-                {{-- <img src="{{asset('assets/images/logo.svg')}}" alt="alternative"> --}}
-                <a class="navbar-brand logo-image" href="index.html">PeduliDiri.com</a>
+            <?php if(!Auth::user()):?>
+            @if (Route::getCurrentRoute()->uri() == 'login' || Route::getCurrentRoute()->uri() == 'register')
+                <li class="nav-item mr-4">
+                    <a class="nav-link active" aria-current="page" href="/" style="font-size: 16px">Home</a>
+                </li>
+            @endif
+            @if (Route::getCurrentRoute()->uri() == 'login')
+                <li class="nav-item">
+                    <a class="btn {{ Route::getCurrentRoute()->uri() == '/' ? 'btn-secondary' : 'btn-primary' }} btn-sm"
+                        href="{{ route('register') }}">Register</a>
+                </li>
+            @else
+                <li class="nav-item">
+                    <a class="btn {{ Route::getCurrentRoute()->uri() == '/' ? 'btn-secondary' : 'btn-primary' }} btn-sm"
+                        href="{{ route('login') }}">Log in</a>
+                </li>
+            @endif
+            <?php endif;?>
 
-                <!-- Text Logo - Use this if you don't have a graphic logo -->
-                <!-- <a class="navbar-brand logo-text" href="index.html">Ioniq</a> -->
-
-                <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
-                    <ul class="navbar-nav ms-auto navbar-nav-scroll">
-
-                        @if (Route::getCurrentRoute()->uri() == '/' || Route::getCurrentRoute()->uri() == 'login' || Route::getCurrentRoute()->uri() == 'register')
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="/">Home</a>
-                            </li>
-                        @else
-                            <li class="nav-item">
-                                <a href="/home" class="nav-link">Perjalanan</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="/profile" class="nav-link">Profile</a>
-                            </li>
-                            @if (auth()->user()->role == 'admin')
-                                <li class="nav-item">
-                                    <a href="/admin/index" class="nav-link">Tables</a>
-                                </li>
-                            @endif
-                            <li class="nav-item">
-                                <a href="{{ route('logout') }}" class="nav-link">Logout</a>
-                            </li>
-
-                            {{-- <li class="nav-item dropdown nav-item-drop">
-                            <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">{{auth()->user()->name}}</a>
-                            <ul class="dropdown-menu" aria-labelledby="dropdown01">
-                                <li><a class="dropdown-item" href="/profile">Profile</a></li>
-                                <li><div class="dropdown-divider"></div></li>
-                                <li><a class="dropdown-item" href="/home">Perjalanan</a></li>
-                                <li><div class="dropdown-divider"></div></li>
-                                <li><a class="dropdown-item" href="{{ route('logout') }}">Log Out</a></li>
-                            </ul>
-                        </li> --}}
-                        @endif
-                    </ul>
-                    <span class="nav-item">
-
-                        <?php if(!Auth::user()):?>
-                        @if (Route::getCurrentRoute()->uri() == 'login')
-                            <a class="btn-outline-sm" href="{{ route('register') }}">Register</a>
-                        @else
-                            <a class="btn-outline-sm" href="{{ route('login') }}">Log in</a>
-                        @endif
-                        <?php endif;?>
-                    </span>
-                </div> <!-- end of navbar-collapse -->
-            </div> <!-- end of container -->
-        </nav> <!-- end of navbar -->
-        <!-- end of navigation -->
+        </ul>
+    </div>
+</nav>

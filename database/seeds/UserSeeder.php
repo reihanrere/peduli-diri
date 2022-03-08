@@ -17,6 +17,7 @@ class UserSeeder extends Seeder
             'role' => "admin",
             'email' => "admin@admin.com",
             'password' => Hash::make('admin'),
+            'foto' => "default.png",
         ]);
 
         DB::table('users')->insert([
@@ -25,6 +26,7 @@ class UserSeeder extends Seeder
             'role' => "siswa",
             'email' => "siswa@siswa.com",
             'password' => Hash::make('siswa'),
+            'foto' => "default.png",
         ]);
     }
 }

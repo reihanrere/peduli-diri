@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use \App\User;
 
 class HomeController extends Controller
 {
@@ -38,7 +39,7 @@ class HomeController extends Controller
     public function show(){
 
         if(auth()->user()->role == 'admin') {
-            $perjalanan = \App\Model\Perjalanan::where(DB::raw('datediff(now(),created_at)'),"<",3)->orderBy('status', 'asc')->get();
+            $perjalanan = \App\Model\Perjalanan::with('User')->orderBy('status', 'asc')->get();
             return response()->json(["code" => "00", "message" => "success" , "data" => $perjalanan]);
         } elseif(auth()->user()->role == 'siswa'){
             $perjalanan = \App\Model\Perjalanan::where('user_id', auth()->user()->id)
@@ -47,6 +48,7 @@ class HomeController extends Controller
                 ->orWhere('status',"<>","Sampai");
             })
             ->orderBy('status','asc')->get();
+            $perjalanan->makeHidden(['user_id']);
             return response()->json(["code" => "00", "message" => "success" , "data" => $perjalanan]);
         }
 
@@ -55,7 +57,11 @@ class HomeController extends Controller
     public function create(Request $request) {
 
         if(empty($request['id_perjalanan'])){
-            \App\Model\Perjalanan::create($request->all());
+            $perjalanan = \App\Model\Perjalanan::create($request->all());
+            if (empty($request->status)) {
+                $perjalanan->status = 'Dalam Perjalanan';
+            }
+            $perjalanan->save();
         } else {
             $perjalanan = \App\Model\Perjalanan::findOrfail($request['id_perjalanan']);
             $perjalanan->update($request->all());
@@ -107,6 +113,5 @@ class HomeController extends Controller
         $user->save();
 
         return redirect('/profile');
-
     }
 }

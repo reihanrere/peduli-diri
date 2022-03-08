@@ -1,199 +1,334 @@
 @extends('layouts.app')
-
+@section('title', __('PeduliDiri.com - Profile'))
 @section('content')
-    <header class="ex-header">
+    <main class="page-blog">
         <div class="container">
             <div class="row">
-                <div class="col-xl-10 offset-xl-1">
-                    <h1>Your Profile <span class="text-warning">{{ strtoupper(auth()->user()->name) }}</span></h1>
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-        </div> <!-- end of container -->
-    </header> <!-- end of ex-header -->
-    <!-- end of header -->
-
-
-    <!-- Basic -->
-    <div class="ex-basic-1 pt-5 pb-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <img class="img-fluid mt-5 mb-3 rounded mx-auto d-block" width="200px"
-                        src="{{ asset('assets/images/Image-post-amico.svg') }}" alt="alternative">
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-        </div> <!-- end of container -->
-    </div> <!-- end of ex-basic-1 -->
-    <!-- end of basic -->
-
-    <!-- Cards -->
-    <div class="ex-cards-1 pt-3 pb-3">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4" style="margin-bottom: 40px">
-                    <h3>Profile</h3>
-                    <div class="profile-card-4 z-depth-3"
-                        style="border: 1px solid #ffda96; padding: 10px; border-radius: 10px; box-sizing:border-box; box-shadow: 0px 5px 10px 8px rgba(0,0,0,0.1);">
-                        <div class="card">
-                            <div class="card-body text-center rounded-top" style="background-color: #fef2dc">
-                                <div class="user-box">
-                                    <img src="{{ url('image')}}/{{auth()->user()->foto}}" alt="user avatar">
+                <div class="col-lg-10 offset-lg-1">
+                    <section class="page-header">
+                        <h1>Your Profile</h1>
+                    </section>
+                    <section class="foi-page-section pt-0">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="profile-card-4 z-depth-3">
+                                    <div class="card">
+                                        <div class="card-body text-center rounded-top">
+                                            <div class="user-box">
+                                                <img src="{{ url('image') 
+                                            }}/{{ auth()->user()->foto }}"
+                                                    alt="user avatar">
+                                            </div>
+                                            <h5 class="mb-1 ">{{ auth()->user()->name }}</h5>
+                                            <h6 class="">{{ auth()->user()->nik }}</h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <ul class="list-group shadow-none">
+                                                <li class="list-group-item">
+                                                    <div class="list-details">
+                                                        <span>{{ auth()->user()->email }}</span>
+                                                        <small>Email Address</small>
+                                                    </div>
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <div class="list-details">
+                                                        <span>{{ auth()->user()->username }}</span>
+                                                        <small>Username</small>
+                                                    </div>
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <div class="list-details">
+                                                        <span>{{ auth()->user()->telp }}</span>
+                                                        <small>Mobile Number</small>
+                                                    </div>
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <div class="list-details">
+                                                        <span>{{ ucfirst(auth()->user()->alamat) }}</span>
+                                                        <small>Address</small>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
-                                <h5 class="mb-1 text-secondary">{{auth()->user()->name}}</h5>
-                                <h6 class="text-secondary">{{ auth()->user()->nik }}</h6>
                             </div>
-                            <div class="card-body">
-                                <ul class="list-group shadow-none">
-                                    <li class="list-group-item">
-                                        <div class="list-details">
-                                            <span>{{ auth()->user()->email }}</span>
-                                            <small>Email Address</small>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <div class="list-details">
-                                            <span>{{ auth()->user()->username }}</span>
-                                            <small>Username</small>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <div class="list-details">
-                                            <span>{{ auth()->user()->telp }}</span>
-                                            <small>Mobile Number</small>
-                                        </div>
-                                    </li>
-                                </ul>
+                            <div class="col-md-6">
+                                <article class="blog-post media" style="padding: 10px; border: none;">
+                                    <form style="width: 100%;" action="/profile/update/{{ $user->id }}" method="POST"
+                                        enctype="multipart/form-data">
+                                        @csrf
+                                        @method('PUT')
+                                        <div class="card" style="width: 100%; border: none;">
+                                            <ul class="list-unstyled">
+                                                <li class="d-flex">
+                                                    <div class="flex-grow-1">
+                                                        <h5>NIK</h5>
+                                                        <input type="number" name="nik" value="{{ $user->nik }}"
+                                                            class="form-control" id="exampleFormControlInput1">
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div> <!-- end of card -->
+                                        <div class="card" style="width: 100%; margin-left: 0; border: none;">
+                                            <ul class="list-unstyled">
+                                                <li class="d-flex">
+                                                    <div class="flex-grow-1">
+                                                        <h5>Email</h5>
+                                                        <input type="email" value="{{ $user->email }}" name="email"
+                                                            class="form-control" id="exampleFormControlInput1">
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div> <!-- end of card -->
+
+                                        <div class="card" style="width: 100%; border: none;">
+                                            <ul class="list-unstyled">
+                                                <li class="d-flex">
+                                                    <div class="flex-grow-1">
+                                                        <h5>Username</h5>
+                                                        <input type="text" value="{{ $user->username }}" name="username"
+                                                            class="form-control" id="exampleFormControlInput1">
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div> <!-- end of card -->
+
+                                        <div class="card" style="width: 100%; border: none;">
+                                            <ul class="list-unstyled">
+                                                <li class="d-flex">
+                                                    <div class="flex-grow-1">
+                                                        <h5>Password</h5>
+                                                        <input type="password" name="password" class="form-control @error('password') is-invalid @enderror"
+                                                            id="exampleFormControlInput1">
+                                                    </div>
+                                                    @error('password')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </li>
+                                            </ul>
+                                        </div> <!-- end of card -->
+
+                                        <div class="card" style="width: 100%; margin-left: 0; border: none;">
+                                            <ul class="list-unstyled">
+                                                <li class="d-flex">
+                                                    <div class="flex-grow-1">
+                                                        <h5>Name</h5>
+                                                        <input type="text" value="{{ $user->name }}" name="name"
+                                                            class="form-control" id="exampleFormControlInput1">
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div> <!-- end of card -->
+
+                                        <div class="card" style="width: 100%; margin-left: 0; border: none;">
+                                            <ul class="list-unstyled">
+                                                <li class="d-flex">
+                                                    <div class="flex-grow-1">
+                                                        <h5>Telp</h5>
+                                                        <input type="number" value="{{ $user->telp }}" name="telp"
+                                                            class="form-control" id="exampleFormControlInput1">
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div> <!-- end of card -->
+                                        
+                                        <div class="card" style="width: 100%; margin-left: 0; border: none;">
+                                            <ul class="list-unstyled">
+                                                <li class="d-flex">
+                                                    <div class="flex-grow-1">
+                                                        <div class="form-group">
+                                                            <h5>Alamat</h5>
+                                                            <select class="form-control mt-3" id="selectProvinsi">
+                                                                <option>Provinsi</option>
+                                                            </select>
+                                                            <select class="form-control mt-3" id="selectKota">
+                                                                <option>Kota</option>
+                                                            </select>
+                                                            <select class="form-control mt-3" id="selectKecamatan">
+                                                                <option>Kecamatan</option>
+                                                            </select>
+                                                            <select class="form-control mt-3" id="selectKelurahan">
+                                                                <option>Kelurahan</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div> <!-- end of card -->
+
+                                        <div class="card" style="width: 100%; border: none;">
+                                            <ul class="list-unstyled">
+                                                <li class="d-flex">
+                                                    <div class="flex-grow-1">
+                                                        <h5>Full Alamat</h5>
+                                                        <textarea class="form-control" value="" name="alamat" id="alamat" rows="3"></textarea>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div> <!-- end of card -->
+
+                                        <div class="card" style="width: 100%; border: none;">
+                                            <ul class="list-unstyled">
+                                                <li class="d-flex">
+                                                    <div class="flex-grow-1">
+                                                        <h5>Foto</h5>
+                                                        <input type="file" name="foto" class="form-control-file"
+                                                            id="exampleFormControlFile1">
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div> <!-- end of card -->
+                                        <button type="submit" class="btn btn-warning btn-sm">Submit</button>
+
+                                    </form>
+                                </article>
                             </div>
                         </div>
-                    </div>
+                    </section>
                 </div>
+            </div>
+        </div>
+    </main>
+    <script>
+        let selectProvinsi = document.getElementById('selectProvinsi');
+        let selectKota = document.getElementById('selectKota');
+        let selectKecamatan = document.getElementById('selectKecamatan');
+        let selectKelurahan = document.getElementById('selectKelurahan');
+        let alamat = document.getElementById('alamat');
 
-                <div class="col-lg-8" style="margin-bottom: 40px">
-                    <h3>Edit Profile</h3>
-                    <div class="d-flex"
-                        style="border: 1px solid #ffda96; padding: 20px; border-radius: 10px; box-sizing:border-box; box-shadow: 0px 5px 10px 8px rgba(0,0,0,0.1);">
-                        <!-- Card -->
-                        <form style="width: 100%;" action="/profile/update/{{ $user->id }}" method="POST"
-                            enctype="multipart/form-data">
-                            @csrf
-                            @method('PUT')
-                            <div class="card" style="width: 100%;">
-                                <ul class="list-unstyled">
-                                    <li class="d-flex">
-                                        <span class="fa-stack">
-                                            <span class="fas fa-circle fa-stack-2x"></span>
-                                            <span class="fa-stack-1x">1</span>
-                                        </span>
-                                        <div class="flex-grow-1">
-                                            <h5>NIK</h5>
-                                            <input type="number" name="nik" value="{{ $user->nik }}"
-                                                class="form-control" id="exampleFormControlInput1">
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div> <!-- end of card -->
-                            <div class="card" style="width: 100%; margin-left: 0;">
-                                <ul class="list-unstyled">
-                                    <li class="d-flex">
-                                        <span class="fa-stack">
-                                            <span class="fas fa-circle fa-stack-2x"></span>
-                                            <span class="fa-stack-1x">2</span>
-                                        </span>
-                                        <div class="flex-grow-1">
-                                            <h5>Email</h5>
-                                            <input type="email" value="{{ $user->email }}" name="email"
-                                                class="form-control" id="exampleFormControlInput1">
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div> <!-- end of card -->
+        document.addEventListener("DOMContentLoaded", function () {
+            fetchProvinsi();
+            selectKota.style.display = "none";
+            selectKecamatan.style.display = "none";
+            selectKelurahan.style.display = "none";
+            // fetchKota();
+            // fetchKecamatan();
+            // fetchKelurahan();
+            getValueToAlamat();
+        });
 
-                            <div class="card" style="width: 100%;">
-                                <ul class="list-unstyled">
-                                    <li class="d-flex">
-                                        <span class="fa-stack">
-                                            <span class="fas fa-circle fa-stack-2x"></span>
-                                            <span class="fa-stack-1x">3</span>
-                                        </span>
-                                        <div class="flex-grow-1">
-                                            <h5>Username</h5>
-                                            <input type="text" value="{{ $user->username }}" name="username"
-                                                class="form-control" id="exampleFormControlInput1">
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div> <!-- end of card -->
+        const config = {
+            method: "GET"
+        };
 
-                            <div class="card" style="width: 100%;">
-                                <ul class="list-unstyled">
-                                    <li class="d-flex">
-                                        <span class="fa-stack">
-                                            <span class="fas fa-circle fa-stack-2x"></span>
-                                            <span class="fa-stack-1x">4</span>
-                                        </span>
-                                        <div class="flex-grow-1">
-                                            <h5>Password</h5>
-                                            <input type="password" name="password" class="form-control"
-                                                id="exampleFormControlInput1">
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div> <!-- end of card -->
+        async function fetchProvinsi() {
+            const URL = 'http://www.emsifa.com/api-wilayah-indonesia/api/provinces.json';
+            await fetch(URL, config)
+                .then(response => response.json())
+                .then(provinsi => {
+                    if (provinsi !== null || undefined) {
+                        provinsi.map(data => {
+                            let opt = document.createElement('option');
+                            opt.value = data.id;
+                            opt.innerHTML = data.name;
+                            selectProvinsi.appendChild(opt);
+                        })
+                    } else {
+                        let opt = document.createElement('option');
+                        opt.value = "";
+                        opt.innerHTML = "Data tidak tersedia";
+                        selectKelurahan.appendChild(opt);
+                    }
+                }).catch(error => alert(`Data provinsi tidak ada`));
+        }
 
-                            <div class="card" style="width: 100%; margin-left: 0">
-                                <ul class="list-unstyled">
-                                    <li class="d-flex">
-                                        <span class="fa-stack">
-                                            <span class="fas fa-circle fa-stack-2x"></span>
-                                            <span class="fa-stack-1x">5</span>
-                                        </span>
-                                        <div class="flex-grow-1">
-                                            <h5>Name</h5>
-                                            <input type="text" value="{{ $user->name }}" name="name"
-                                                class="form-control" id="exampleFormControlInput1">
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div> <!-- end of card -->
+        async function fetchKota(id) {
+            const URL = `http://www.emsifa.com/api-wilayah-indonesia/api/regencies/${id === undefined || null ? "" : id}.json`;
+            await fetch(URL, config)
+                .then(response => response.json())
+                .then(kota => {
+                    if (kota !== null || undefined) {
+                        kota.map(data => {
+                            let opt = document.createElement('option');
+                            opt.value = data.id;
+                            opt.innerHTML = data.name;
+                            selectKota.appendChild(opt);
+                        })
+                    } else {
+                        let opt = document.createElement('option');
+                        opt.value = "";
+                        opt.innerHTML = "Data tidak tersedia";
+                        selectKelurahan.appendChild(opt);
+                    }
+                });
+        }
 
-                            <div class="card" style="width: 100%; margin-left: 0;">
-                                <ul class="list-unstyled">
-                                    <li class="d-flex">
-                                        <span class="fa-stack">
-                                            <span class="fas fa-circle fa-stack-2x"></span>
-                                            <span class="fa-stack-1x">6</span>
-                                        </span>
-                                        <div class="flex-grow-1">
-                                            <h5>Telp</h5>
-                                            <input type="number" value="{{ $user->telp }}" name="telp"
-                                                class="form-control" id="exampleFormControlInput1">
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div> <!-- end of card -->
+        async function fetchKecamatan(id) {
+            const URL = `http://www.emsifa.com/api-wilayah-indonesia/api/districts/${id === undefined || null ? "" : id}.json`;
+            await fetch(URL, config)
+                .then(response => response.json())
+                .then(kecamatan => {
+                    if (kecamatan !== null || undefined) {
+                        kecamatan.map(data => {
+                            let opt = document.createElement('option');
+                            opt.value = data.id;
+                            opt.innerHTML = data.name;
+                            selectKecamatan.appendChild(opt);
+                        })
+                    } else {
+                        let opt = document.createElement('option');
+                        opt.value = "";
+                        opt.innerHTML = "Data tidak tersedia";
+                        selectKelurahan.appendChild(opt);
+                    }
+                });
+        }
 
-                            <div class="card" style="width: 100%;">
-                                <ul class="list-unstyled">
-                                    <li class="d-flex">
-                                        <span class="fa-stack">
-                                            <span class="fas fa-circle fa-stack-2x"></span>
-                                            <span class="fa-stack-1x">7</span>
-                                        </span>
-                                        <div class="flex-grow-1">
-                                            <h5>Foto</h5>
-                                            <input type="file" name="foto" class="form-control-file"
-                                                id="exampleFormControlFile1">
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div> <!-- end of card -->
-                            <button type="submit" class="btn btn-warning btn-sm">Submit</button>
+        async function fetchKelurahan(id) {
+            const URL = `http://www.emsifa.com/api-wilayah-indonesia/api/villages/${id === undefined || null ? "" : id}.json`;
+            await fetch(URL, config)
+                .then(response => response.json())
+                .then(kelurahan => {
+                    if (kelurahan !== null || undefined) {
+                        kelurahan.map(data => {
+                            let opt = document.createElement('option');
+                            opt.value = data.id;
+                            opt.innerHTML = data.name;
+                            selectKelurahan.appendChild(opt);
+                        })
+                    } else {
+                        let opt = document.createElement('option');
+                        opt.value = "";
+                        opt.innerHTML = "Data tidak tersedia";
+                        selectKelurahan.appendChild(opt);
+                    }
+                });
+        }
 
-                        </form>
-                    </div>
-                </div>
-            </div> <!-- end of row -->
-        </div> <!-- end of container -->
-    </div> <!-- end of ex-cards-1 -->
-    <!-- end of cards -->
+        // selectProvinsi.addEventListener('change', () => {
+        //     console.log(selectProvinsi.options[selectProvinsi.selectedIndex].text);
+        // })
+
+        selectProvinsi.addEventListener('change', () => {
+            fetchKota(selectProvinsi.value);
+            selectKota.style.display = "block";
+            selectKota.innerHTML = '';
+            selectKecamatan.innerHTML = '';
+            selectKelurahan.innerHTML = '';
+        });
+
+        selectKota.addEventListener('change', () => {
+            fetchKecamatan(selectKota.value);
+            selectKecamatan.style.display = "block";
+            selectKecamatan.innerHTML = '';
+            selectKelurahan.innerHTML = '';
+        });
+
+        selectKecamatan.addEventListener('change', () => {
+            fetchKelurahan(selectKecamatan.value);
+            selectKelurahan.style.display = "block";
+            selectKelurahan.innerHTML = '';
+        });
+
+        function getValueToAlamat() {
+            alamat.addEventListener('change', () => {
+                let alamatText = alamat.value;
+                document.getElementById('alamat').value = `${alamatText}, ${selectKelurahan.options[selectKelurahan.selectedIndex].text}, ${selectKecamatan.options[selectKecamatan.selectedIndex].text}, ${selectKota.options[selectKota.selectedIndex].text}, ${selectProvinsi.options[selectProvinsi.selectedIndex].text}, `;
+                // console.log(`${alamatText}, ${selectKelurahan.options[selectKelurahan.selectedIndex].text}, ${selectKecamatan.options[selectKecamatan.selectedIndex].text}, ${selectKota.options[selectKota.selectedIndex].text}, ${selectProvinsi.options[selectProvinsi.selectedIndex].text}, `);
+            });
+        }
+    </script>
 @endsection

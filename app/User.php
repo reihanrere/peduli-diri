@@ -16,8 +16,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','nik','username','telp','foto','role'
+        'name', 'email', 'password','nik','username','telp','foto','role','alamat'
     ];
+
 
     /**
      * The attributes that should be hidden for arrays.
@@ -36,4 +37,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function Perjalanan () {
+        return $this->hasMany('App\Model\Perjalanan', 'user_id');
+    }
 }
