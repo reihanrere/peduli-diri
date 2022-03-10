@@ -28,5 +28,6 @@ class UserSeeder extends Seeder
             'password' => Hash::make('user'),
             'foto' => "default.png",
         ]);
+        
     }
 }
