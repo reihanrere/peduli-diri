@@ -40,12 +40,12 @@
                                             <tbody>
                                                 @foreach ($users as $user)
                                                     <tr>
-                                                        <td>{{ $user->nik }}</td>
-                                                        <td>{{ $user->name }}</td>
-                                                        <td>{{ $user->email }}</td>
-                                                        <td>{{ $user->username }}</td>
-                                                        <td>{{ $user->telp }}</td>
-                                                        <td>{{ $user->alamat }}</td>
+                                                        <td>{{ $user->nik == null ? "Data tidak tersedia" : $user->nik}}</td>
+                                                        <td>{{ $user->name == null ? "Data tidak tersedia" : $user->name }}</td>
+                                                        <td>{{ $user->email == null ? "Data tidak tersedia" : $user->email }}</td>
+                                                        <td>{{ $user->username == null ? "Data tidak tersedia" : $user->username }}</td>
+                                                        <td>{{ $user->telp == null ? "Data tidak tersedia" : $user->telp }}</td>
+                                                        <td>{{ $user->alamat == null ? "Data tidak tersedia" : $user->alamat }}</td>
                                                         <td>
                                                             <img src="{{ url('image') }}/{{ $user->foto }}"
                                                             alt="user avatar" style="max-width: 50px;">

@@ -89,7 +89,7 @@
                                                 <label for="colFormLabel" class="col-sm-2 col-form-label">Alamat</label>
                                                 <div class="col-sm-10">
                                                     <textarea class="form-control" value="" name="alamat" id="alamat"
-                                                        rows="3"></textarea>
+                                                        rows="3">{{$user->alamat}}</textarea>
                                                 </div>
                                         </li>
                                         <li class="list-group-item">

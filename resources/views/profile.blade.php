@@ -19,32 +19,32 @@
                                             }}/{{ auth()->user()->foto }}"
                                                     alt="user avatar">
                                             </div>
-                                            <h5 class="mb-1 ">{{ auth()->user()->name }}</h5>
-                                            <h6 class="">{{ auth()->user()->nik }}</h6>
+                                            <h5 class="mb-1 ">{{ auth()->user()->name == null ? "Data kosong" : auth()->user()->name }}</h5>
+                                            <h6 class="">{{ auth()->user()->nik == null ? "Data kosong" : auth()->user()->nik }}</h6>
                                         </div>
                                         <div class="card-body">
                                             <ul class="list-group shadow-none">
                                                 <li class="list-group-item">
                                                     <div class="list-details">
-                                                        <span>{{ auth()->user()->email }}</span>
+                                                        <span>{{ auth()->user()->email == null ? "Data kosong" : auth()->user()->email }}</span>
                                                         <small>Email Address</small>
                                                     </div>
                                                 </li>
                                                 <li class="list-group-item">
                                                     <div class="list-details">
-                                                        <span>{{ auth()->user()->username }}</span>
+                                                        <span>{{ auth()->user()->username == null ? "Data kosong" : auth()->user()->username }}</span>
                                                         <small>Username</small>
                                                     </div>
                                                 </li>
                                                 <li class="list-group-item">
                                                     <div class="list-details">
-                                                        <span>{{ auth()->user()->telp }}</span>
+                                                        <span>{{ auth()->user()->telp == null ? "Data kosong" : "0" + auth()->user()->telp }}</span>
                                                         <small>Mobile Number</small>
                                                     </div>
                                                 </li>
                                                 <li class="list-group-item">
                                                     <div class="list-details">
-                                                        <span>{{ ucfirst(auth()->user()->alamat) }}</span>
+                                                        <span>{{ ucfirst(auth()->user()->alamat == null ? "Data kosong" : auth()->user()->alamat) }}</span>
                                                         <small>Address</small>
                                                     </div>
                                                 </li>
