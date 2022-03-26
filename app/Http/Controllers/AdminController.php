@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use \App\Model\Perjalanan;
 use \App\User;
 use Illuminate\Support\Facades\Hash;
+use PDF;
 
 class AdminController extends Controller
 {
@@ -67,5 +68,33 @@ class AdminController extends Controller
 
         return redirect('/admin/index');
 
+    }
+
+    public function ExportPdfId($id) {
+        $user = User::findOrFail($id);
+        $name = $user->name;
+        $data = [
+            'nik' => $user->nik,
+            'name' => $user->name,
+            'email' => $user->email,
+            'username' => $user->username,
+            'telp' => $user->telp,
+            'foto' => $user->foto,
+            'alamat' => $user->alamat,
+        ];
+
+        // dd($data);
+        $pdf = PDF::loadView('admin.export-pdf',$data);
+
+        // dd($pdf);
+        return $pdf->download('Peduli-Diri - ' . $name . '.pdf');
+    }
+
+    public function ExportPDF() {
+        $users = User::all();
+
+        $pdf = PDF::loadView('admin.pdf-export',compact('users'));
+        // dd($users);
+        return $pdf->download('Peduli-Diri-DataUserAll.pdf');
     }
 }

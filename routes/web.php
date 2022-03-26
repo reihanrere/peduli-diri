@@ -49,6 +49,6 @@ Route::group(['middleware' => ['auth','checkRole:admin']],function(){{
     Route::post('/admin/store-kota','AdminController@StoreKota');
     Route::get('/admin/edit-kota/{id}','AdminController@EditKota');
     Route::put('/admin/update-kota/{id}','AdminController@UpdateKota');
-    // Route::get('/admin/delete-kota/{id}','AdminController@DeleteKota');
-    
+    Route::get('/export-pdf/{id}','AdminController@ExportPdfId');
+    Route::get('/export-pdf','AdminController@ExportPDF');
 }});

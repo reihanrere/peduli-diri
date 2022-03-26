@@ -21,8 +21,15 @@
                             <div id="featureFaqOneCollapse" class="collapse" aria-labelledby="featureFaqOneTitle"
                                 style="">
                                 <div class="card-body">
-                                    <a href="/admin/create-user" class="btn btn-success btn-sm" class="btn btn-danger btn-sm"
+                                    <a href="/admin/create-user" class="btn btn-success btn-sm" 
                                         style="width: 70px; padding: 5px; margin-bottom: 10px;">Tambah</a>
+                                    <a href="/export-pdf" class="btn btn-primary btn-sm" 
+                                        style="width: 70px; padding: 5px; margin-bottom: 10px;">
+                                        <span style="margin-right: 5px">PDF</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-save" viewBox="0 0 16 16">
+                                            <path d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v7.293l2.646-2.647a.5.5 0 0 1 .708.708l-3.5 3.5a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L7.5 9.293V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1H2z"/>
+                                        </svg>
+                                    </a>
                                     <div class="table-responsive">
                                         <table class="table">
                                             <thead>
@@ -40,21 +47,32 @@
                                             <tbody>
                                                 @foreach ($users as $user)
                                                     <tr>
-                                                        <td>{{ $user->nik == null ? "Data tidak tersedia" : $user->nik}}</td>
-                                                        <td>{{ $user->name == null ? "Data tidak tersedia" : $user->name }}</td>
-                                                        <td>{{ $user->email == null ? "Data tidak tersedia" : $user->email }}</td>
-                                                        <td>{{ $user->username == null ? "Data tidak tersedia" : $user->username }}</td>
-                                                        <td>{{ $user->telp == null ? "Data tidak tersedia" : $user->telp }}</td>
-                                                        <td>{{ $user->alamat == null ? "Data tidak tersedia" : $user->alamat }}</td>
-                                                        <td>
-                                                            <img src="{{ url('image') }}/{{ $user->foto }}"
-                                                            alt="user avatar" style="max-width: 50px;">
+                                                        <td>{{ $user->nik == null ? 'Data tidak tersedia' : $user->nik }}
+                                                        </td>
+                                                        <td>{{ $user->name == null ? 'Data tidak tersedia' : $user->name }}
+                                                        </td>
+                                                        <td>{{ $user->email == null ? 'Data tidak tersedia' : $user->email }}
+                                                        </td>
+                                                        <td>{{ $user->username == null ? 'Data tidak tersedia' : $user->username }}
+                                                        </td>
+                                                        <td>{{ $user->telp == null ? 'Data tidak tersedia' : $user->telp }}
+                                                        </td>
+                                                        <td>{{ $user->alamat == null ? 'Data tidak tersedia' : $user->alamat }}
                                                         </td>
                                                         <td>
-                                                            <a href="/admin/edit-user/{{$user->id}}" class="btn btn-warning btn-sm"
+                                                            <img src="{{ url('image') }}/{{ $user->foto }}"
+                                                                alt="user avatar" style="max-width: 50px;">
+                                                        </td>
+                                                        <td>
+                                                            <a href="/admin/edit-user/{{ $user->id }}"
+                                                                class="btn btn-warning btn-sm"
                                                                 style="width: 70px; padding: 5px">Edit</a>
-                                                            <a href="/admin/delete-user/{{$user->id}}" class="btn btn-danger btn-sm"
+                                                            <a href="/admin/delete-user/{{ $user->id }}"
+                                                                class="btn btn-danger btn-sm"
                                                                 style="width: 70px; padding: 5px">Delete</a>
+                                                            <a href="/export-pdf/{{ $user->id }}"
+                                                                class="btn btn-danger btn-sm"
+                                                                style="width: 70px; padding: 5px">PDF</a>
                                                         </td>
                                                     </tr>
                                                 @endforeach
